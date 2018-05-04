@@ -94,18 +94,21 @@ def game_loop():
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    x_change = -5
+                    guy.move(-5)
                 elif event.key == pygame.K_RIGHT:
-                    x_change = 5
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    x_change = 0
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                    guy.move(5)
+                elif event.key == pygame.K_SPACE:
                     guy.shoot()
 
-            x = x_change
-            guy.move(x_change)
+                    print('we\re shooting')
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    guy.move(0)
+            
+                
+
+            
+            
 
       
         gameDisplay.fill(white) 
@@ -117,6 +120,9 @@ def game_loop():
 
         #guy(x, y)
         guy.render(gameDisplay)
+        for bullet in guy.bullets:
+            bullet.update()
+            bullet.render(gameDisplay)
 
     
 
